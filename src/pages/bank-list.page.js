@@ -24,7 +24,7 @@ app.controller('bankListCtrl', ['$scope', 'bankListService', function ($scope, b
             }],
             banks: [],
             page:{
-                pageSize: 0
+                pageSize: 20
             }
         },
         operations: {

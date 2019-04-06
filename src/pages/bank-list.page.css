@@ -1,5 +1,5 @@
 .bank-list-page {
-    width: 80%;
+    width: 90%;
     height: 100%;
 }
 .list-body > div:hover {
@@ -15,4 +15,5 @@
 
 .bank-list {
     height: calc(100% - 80px);
+    min-width: 100%;
 }
