@@ -24,11 +24,12 @@ app.controller('bankListCtrl', ['$scope', 'bankListService', function ($scope, b
             }],
             banks: [],
             page:{
-                pageSize: 20
+                pageSize: 0
             }
         },
         operations: {
             getBankListForCity: function getBankListForCity(city) {
+                $scope.bankList.model.searchKeyword = '';
                 function onSuccess(response) {
                     $scope.bankList.model.banks = $scope.bankList.model.page.pageSize ? response.data.slice(1, $scope.bankList.model.page.pageSize) : response.data;
                 }
