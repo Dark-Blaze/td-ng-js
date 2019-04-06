@@ -1,0 +1,41 @@
+<div class="bank-list-page padding-lg absolute" ng-controller="bankListCtrl">
+    <div class="row">
+        <div class="col-3">
+            <div class="form-group">
+                <select class="form-control" id="cityList" ng-options="city as city.label for city in bankList.model.cityList track by city.key"
+                    ng-model="bankList.model.city" ng-change="bankList.operations.getBankListForCity()">
+                </select>
+            </div>
+        </div>
+        <div class="col offset-md-1">
+            <input type="text" class="form-control" placeholder="Search bank" ng-model="bankList.model.searchKeyword" />
+        </div>
+    </div>
+    <div class="bank-list border bg-light absolute" ng-if="bankList.model.banks.length > 0">
+        <div class="header-row row no-gutters padding-lg font-weight-bold padding-bottom-md bg-white">
+            <div class="col text-capitalize">IFSC</div>
+            <div class="col-1 text-capitalize">Bank ID</div>
+            <div class="col text-capitalize">branch</div>
+            <div class="col text-capitalize">address</div>
+            <div class="col-1 text-capitalize">city</div>
+            <div class="col text-capitalize">district</div>
+            <div class="col text-capitalize">state</div>
+            <div class="col text-capitalize">bank name</div>
+        </div>
+        <div class="list-body">
+            <div class="row no-gutters padding-lg" ng-repeat="bank in list = (bankList.model.banks | filter:bankList.model.searchKeyword) track by $index">
+                <div class="col ellipsis" title="{{bank.ifsc}}">{{bank.ifsc}}</div>
+                <div class="col-1 ellipsis" title="{{bank.bank_id}}">{{bank.bank_id}}</div>
+                <div class="col ellipsis" title="{{bank.branch}}">{{bank.branch}}</div>
+                <div class="col ellipsis" title="{{bank.address}}">{{bank.address}}</div>
+                <div class="col-1 ellipsis" title="{{bank.city}}">{{bank.city}}</div>
+                <div class="col ellipsis" title="{{bank.district}}">{{bank.district}}</div>
+                <div class="col ellipsis" title="{{bank.state}}">{{bank.state}}</div>
+                <div class="col ellipsis" title="{{bank.bank_name}}">{{bank.bank_name}}</div>
+            </div>
+            <div class="no-result text-center text-mute padding-lg text-capitalize" ng-if="!list.length">
+                No result found for <span class="font-weight-bold">{{bankList.model.searchKeyword}}</span>
+            </div>
+        </div>
+    </div>
+</div>
