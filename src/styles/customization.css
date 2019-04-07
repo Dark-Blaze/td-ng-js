@@ -1,0 +1,12 @@
+.pagination {
+}
+.pagination-page, .pagination-first, .pagination-prev, .pagination-next, .pagination-last{
+    padding: 10px;
+}
+.pagination-page.active{
+    border-bottom:5px solid #007bff;
+}
+.pagination-page.active > a {
+    color: #007bff;
+    font-weight: bolder;
+}

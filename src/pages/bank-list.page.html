@@ -11,7 +11,12 @@
             <input type="text" class="form-control" placeholder="Search bank" ng-model="bankList.model.searchKeyword" />
         </div>
     </div>
+
     <div class="bank-list border bg-light absolute" ng-if="bankList.model.banks.length > 0">
+        <div class="">
+            <ul uib-pagination total-items="bankList.model.page.totalItems" ng-model="bankList.model.page.currentPage" ng-change="bankList.operations.pageChange()"
+                direction-links="true" boundary-links="true" max-size="bankList.model.page.maxSize"></ul>
+        </div>
         <div class="header-row row no-gutters padding-lg font-weight-bold padding-bottom-md bg-white">
             <div class="col text-capitalize">IFSC</div>
             <div class="col-1 text-capitalize">Bank ID</div>
@@ -23,7 +28,7 @@
             <div class="col text-capitalize">bank name</div>
         </div>
         <div class="list-body">
-            <div class="row no-gutters padding-lg" ng-repeat="bank in list = (bankList.model.banks | filter:bankList.model.searchKeyword) track by $index">
+            <div class="row no-gutters padding-lg" ng-repeat="bank in list = (bankList.model.page.pagedData | filter:bankList.model.searchKeyword) track by $index">
                 <div class="col ellipsis" title="{{bank.ifsc}}">{{bank.ifsc}}</div>
                 <div class="col-1 ellipsis" title="{{bank.bank_id}}">{{bank.bank_id}}</div>
                 <div class="col ellipsis" title="{{bank.branch}}">{{bank.branch}}</div>
@@ -34,8 +39,11 @@
                 <div class="col ellipsis" title="{{bank.bank_name}}">{{bank.bank_name}}</div>
             </div>
             <div class="no-result text-center text-mute padding-lg text-capitalize" ng-if="!list.length">
-                No result found for <span class="font-weight-bold">{{bankList.model.searchKeyword}}</span>
+                No result found for
+                <span class="font-weight-bold">{{bankList.model.searchKeyword}}</span>
             </div>
+
         </div>
+
     </div>
 </div>

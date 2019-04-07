@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute', 'angular-loading-bar']);
+var app = angular.module('app', ['ngRoute', 'angular-loading-bar', 'ui.bootstrap']);
 app.config(['$routeProvider', function config($routeProvider) {
     $routeProvider
         .when('/bank-list', {
