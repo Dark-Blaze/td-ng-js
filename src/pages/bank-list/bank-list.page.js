@@ -6,22 +6,7 @@ app.controller('bankListCtrl', ['$scope', 'bankListService', function ($scope, b
                 key: 'MUMBAI'
             },
             searchKeyword: '',
-            cityList: [{
-                label: 'Hyderabad',
-                key: 'HYDERABAD'
-            }, {
-                label: 'Mumbai',
-                key: 'MUMBAI'
-            }, {
-                label: 'Delhi',
-                key: 'DELHI'
-            }, {
-                label: 'Bangalore',
-                key: 'BANGALORE'
-            }, {
-                label: 'Chennai',
-                key: 'CHENNAI'
-            }],
+            cityList: [],
             banks: [],
             page:{
                 maxSize:5,
@@ -48,8 +33,12 @@ app.controller('bankListCtrl', ['$scope', 'bankListService', function ($scope, b
                 bankListService.fetchBankList($scope.bankList.model.city.key).then(onSuccess, onError);
 
             },
-            pageChange: function pageChange() {
-                $scope.bankList.operations.setPage($scope.bankList.model.page.currentPage);
+            getCities: function getCities() {
+                $scope.bankList.model.cityList = bankListService.fetchCityList();
+            },
+            pageChange: function pageChange(obj) {
+                let page = obj.curPage;
+                $scope.bankList.operations.setPage(page);
             },
             setPage: function setPage(current) {
                 $scope.bankList.model.page.pagedData = $scope.bankList.model.banks.slice((current - 1) * 10, current * $scope.bankList.model.page.size);
@@ -58,7 +47,7 @@ app.controller('bankListCtrl', ['$scope', 'bankListService', function ($scope, b
     }
 
 
-    
+    $scope.bankList.operations.getCities();
     if ($scope.bankList.model.city !== {}) {
         $scope.bankList.operations.getBankListForCity($scope.bankList.model.city)
     }
